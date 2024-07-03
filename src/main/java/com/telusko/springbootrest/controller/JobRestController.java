@@ -14,8 +14,7 @@ public class JobRestController {
 	
 	@Autowired
 	private JobService service;
-	
-	
+
 	@GetMapping("jobPosts")
 	public List<JobPost> getAllJobs() {
 		return service.getAllJobs();
@@ -43,6 +42,17 @@ public class JobRestController {
 		service.deleteJob(postId);
 		return "Deleted";
 
+	}
+
+	@GetMapping("load")
+	public String loadData() {
+		service.load();
+		return "success";
+	}
+
+	@GetMapping("jobPosts/keyword/{keyword}")
+	public List<JobPost> searchByKeyword(@PathVariable String keyword) {
+		return service.search(keyword);
 	}
 
 }
